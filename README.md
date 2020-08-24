@@ -12,4 +12,7 @@ This component will fire a event `parent-to-child` with some arbitrary data afte
 **Child Component**
 This component will also fire a event `child-to-parent` with some arbitrary data which should fire off the listener in the parent component after 3 Seconds
 
+**Redux**
+check out `redux-example` branch to see how we can leverage this system with a central state management.
+
 
