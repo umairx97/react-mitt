@@ -1,28 +1,26 @@
 import React, { Component } from 'react'
-import ChildComponent from './Child'
 import { emitterKeys, emitter } from '../emitterKeys'
+import { connect } from 'react-redux'
 
 export class ParentComponent extends Component {
   componentDidMount () {
     setTimeout(() => {
-      emitter.emit(emitterKeys.parentToChild, { hello: 'world' })
+      emitter.emit(emitterKeys.ON_SET_TITLE, { title: 'I was changed through a event' })
     }, 2000)
-
-    emitter.on(emitterKeys.childToParent, dt => console.log('Child called the parent', dt))
   }
 
   componentWillUnmount () {
-    emitter.off(emitterKeys.childToParent)
+    emitter.off(emitterKeys.ON_SET_TITLE)
   }
 
   render () {
     return (
       <div>
         <h1>This is a parent component</h1>
-        <ChildComponent />
+        {this.props.title}
       </div>
     )
   }
 }
 
-export default ParentComponent
+export default connect((state) => ({ title: state.title }))(ParentComponent)
